@@ -1,13 +1,18 @@
 'use client'
 
-import { useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import api from '@/app/banking/services/axiosClient';
 import TopNavbar from "@/app/banking/components/topNavbar";
 
 
+interface LoginPayloadType {
+    username: string;
+    password: string;
+}
+
 export default function login(){
-    const [loginPayload, setLoginPayload] = useState({});
+    const [loginPayload, setLoginPayload] = useState<LoginPayloadType>({username: '', password: ''});
     const [isOpen, setIsOpen] = useState(false);
     const [loginErrors, setLoginErrors] = useState(null);
 
@@ -17,7 +22,7 @@ export default function login(){
         setIsOpen(!isOpen)
     }
 
-    const submit = (event) => {
+    const submit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setLoginErrors(null)
 
@@ -33,9 +38,9 @@ export default function login(){
             })
     }
 
-    const handleFormChange = (event) => {
+    const handleFormChange = (event: ChangeEvent<HTMLInputElement>) => {
         const currentLoginPayload = loginPayload
-        currentLoginPayload[event.target.name] = event.target.value
+        currentLoginPayload[event.target.name as keyof typeof currentLoginPayload] = event.target.value
         setLoginPayload(currentLoginPayload)
         console.log(loginPayload)
     }

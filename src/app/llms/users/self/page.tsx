@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, } from "react";
+import { ChangeEvent, MouseEventHandler, useEffect, useState, } from "react";
 
 import { User } from "../types";
 import axiosCookieClient from "@/services/axiosCookieClient";
@@ -218,8 +218,8 @@ function ImageUploadModal(props: ImageUploadModalProps){
         }
     }
 
-    function onChangeInput(event){
-        setFileContent(event.target.files[0]);
+    function onChangeInput(event: ChangeEvent<HTMLInputElement>){
+        setFileContent(event.target.files![0]);
     }
 
     return (
@@ -227,11 +227,11 @@ function ImageUploadModal(props: ImageUploadModalProps){
             <div className="w-86 h-86 flex justify-center bg-gray-200 rounded-md">
                 <form className={"flex flex-col justify-around"} onSubmit={submitImage}>
                     <div className="flex justify-center">
-                        <input type={"file"} name="profile-image" onChange={onChangeInput}></input>
+                        <input type={"file"} name="profile-image" onChange={e => onChangeInput(e)}></input>
                     </div>                    
                     <div className={"w-full flex justify-around"}>
                         <button type={"button"} onClick={submitImage}>select</button>
-                        <button onClick={props.toggleModalVisibility}>Close</button>
+                        <button onClick={e => props.toggleModalVisibility(e)}>Close</button>
                     </div>
                 </form>                   
             </div>

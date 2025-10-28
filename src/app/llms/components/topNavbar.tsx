@@ -9,9 +9,21 @@ type Props = {
     style?: string
 }
 
+type UserDataType = {
+    id: string,
+    last_login: string | null,
+    username: string,
+    first_name: string,
+    last_name: string,
+    email: string,
+    is_active: boolean,
+    date_joined: string,
+    main_profile_image_url: string
+}
+
 export default function TopNavbar(props: Props) {
 
-    const [userData, setUserData] = useState(null);
+    const [userData, setUserData] = useState<UserDataType | null>(null);
     const router = useRouter();
 
     useEffect(() => {

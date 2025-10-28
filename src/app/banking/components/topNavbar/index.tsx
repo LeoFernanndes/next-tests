@@ -1,19 +1,22 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { MouseEventHandler, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation';
 
 import Image from 'next/image';
 import bankSvg from '../../../../../public/bank.svg'
-import { useAuth } from '@/app/contexts/authContext'
 import axiosCookieClient from '@/services/axiosCookieClient'
 
 
-export default function TopNavbar({isOpen, toggleMenu}){
-    
+interface TopNavbarProps {
+    isOpen: boolean;
+    toggleMenu: MouseEventHandler<HTMLButtonElement | HTMLAnchorElement> | undefined;
+}
+
+
+export default function TopNavbar(props: TopNavbarProps){
     const [apiUser, setApiUser] = useState(null);
     const router = useRouter();
-    const { user, login } = useAuth();
 
     useEffect(() => {
         axiosCookieClient.get('/api/v1/users/retrieve_self/')
@@ -57,8 +60,8 @@ export default function TopNavbar({isOpen, toggleMenu}){
                                 <span className="text-2xl font-bold ml-2">Sample Bank</span>  
                             </div>
                             <div className="md:hidden">
-                                <button className="flex justify-center items-center" onClick={toggleMenu} aria-expanded={isOpen}>
-                                    {isOpen ? "close" : "open"}
+                                <button className="flex justify-center items-center" onClick={props.toggleMenu} aria-expanded={props.isOpen}>
+                                    {props.isOpen ? "close" : "open"}
                                 </button>
                             </div>
                             
@@ -70,7 +73,7 @@ export default function TopNavbar({isOpen, toggleMenu}){
                         </div>                                                     
                     </div>
                                 
-                    <div className={`md:hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
+                    <div className={`md:hidden transition-all duration-300 ease-in-out ${props.isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
                         <div className="space-y-1">
                             <a className="block text-base rounded-md hover:bg-gray-700 transition-colors">Logoff</a>
                         </div>
@@ -86,8 +89,8 @@ export default function TopNavbar({isOpen, toggleMenu}){
                             <span className="text-2xl font-bold ml-2">Sample Bank</span>  
                         </div>
                         <div className="md:hidden">
-                            <button className="flex justify-center items-center" onClick={toggleMenu} aria-expanded={isOpen}>
-                                {isOpen ? "close" : "open"}
+                            <button className="flex justify-center items-center" onClick={props.toggleMenu} aria-expanded={props.isOpen}>
+                                {props.isOpen ? "close" : "open"}
                             </button>
                         </div>
                         
@@ -100,10 +103,10 @@ export default function TopNavbar({isOpen, toggleMenu}){
                     </div>                                                     
                 </div>
                             
-                <div className={`md:hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
+                <div className={`md:hidden transition-all duration-300 ease-in-out ${props.isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
                     <div className="space-y-1">
-                        <a className="block text-base rounded-md hover:bg-gray-700 transition-colors" onClick={toggleMenu}>Login</a>
-                        <a className="block text-base rounded-md hover:bg-gray-700 transition-colors" onClick={toggleMenu}>Register</a>
+                        <a className="block text-base rounded-md hover:bg-gray-700 transition-colors" onClick={props.toggleMenu}>Login</a>
+                        <a className="block text-base rounded-md hover:bg-gray-700 transition-colors" onClick={props.toggleMenu}>Register</a>
                     </div>
                 </div>
             </nav>}
