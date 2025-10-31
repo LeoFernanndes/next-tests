@@ -1,11 +1,8 @@
 import axios from 'axios';
-import * as dotenv from 'dotenv';
 
-
-dotenv.config();
 
 const axiosCookieClient = axios.create({
-  baseURL: `${process.env.API_ROOT}:${process.env.API_PORT}`,
+  baseURL: `${process.env.NEXT_PUBLIC_API_ROOT}:${process.env.NEXT_PUBLIC_API_PORT}`,
   withCredentials: true, // Important for httpOnly cookies
 });
 
