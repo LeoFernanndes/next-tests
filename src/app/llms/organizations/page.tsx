@@ -54,7 +54,8 @@ const organizationCard = (organization: any, openOrganizationDetail: Function) =
         <div key={organization.id} className={"w-58 h-64 flex flex-col items-center rounded-md border border-gray-700 cursor-pointer"}
         onClick={() => openOrganizationDetail(organization.id)}
         >
-            <div>{organization.id}</div>
+            <div>Name</div>
+            <div>{organization.name}</div>
 
         </div>
     )

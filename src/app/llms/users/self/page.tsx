@@ -117,7 +117,6 @@ export default function UserSelf(){
         setIsModalOpen(!isModalOpen)
     }
 
-
     return (        
         <div className={"w-full min-h-screen flex flex-col bg-gray-100"}>
             <div className={"flex h-12 sticky top-0"}>
@@ -191,7 +190,7 @@ function ImageUploadModal(props: ImageUploadModalProps){
     }
 
     async function submitImage(){
-        const urlResponse = await axiosCookieClient.post('/api/v1/users/generate-upload-profile-image-presigned-url', {filename: fileContent!.name, content_type: fileContent!.type}, {headers: {'Content-Type': 'application/json'}})
+        const urlResponse = await axiosCookieClient.post('/api/v1/users/generate-upload-profile-image-presigned-url', {filename: fileContent!.name, mime_type: fileContent!.type}, {headers: {'Content-Type': 'application/json'}})
         if (urlResponse.status == 200){
             const presignedUrl = urlResponse.data['url']
             const fileId = urlResponse.data['file_id']

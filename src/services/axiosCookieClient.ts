@@ -14,7 +14,7 @@ axiosCookieClient.interceptors.response.use(
       originalRequest._retry = true;     
       
       try {
-        const refreshResponse = await axios.post(`${process.env.API_ROOT}:${process.env.API_PORT}/api/v1/users/auth/refresh/`, {}, {withCredentials: true})
+        const refreshResponse = await axios.post(`${process.env.NEXT_PUBLIC_API_ROOT}:${process.env.NEXT_PUBLIC_API_PORT}/api/v1/users/auth/refresh/`, {}, {withCredentials: true})
         return axiosCookieClient(originalRequest)
       } catch(refreshError){
         return Promise.reject(refreshError)     
